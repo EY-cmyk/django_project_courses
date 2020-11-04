@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+
+{% block title %} List of courses {% endblock %}
+
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'list.css' %}" />
+
+{% block content %}
+
+    {% if latest_courses_list %}
+        {% for a in latest_courses_list %}
+        <div style=" position: relative; top: 20px; ">
+		    <div class="card" style="width: 18rem; position: relative; left: 40%;  text-align: center; align-items: center; box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+			   {% load static %}
+			   <img style="width:280px;" src= '{% static "images/coding.jpeg" %}' alt="Coding photo"><!-- normal image not working -->
+			   <div class="card-body">
+				    <h5 class="card-title">{{a.course_title}}</h5>
+				    <hr>
+				    <p class="card-text">{{a.course_description}}</p>
+				    <button type="button" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Открыть описание курса">
+				      <a style="color:white;" href="{% url 'courses:courseview' a.id %}">{{a.course_title}}</a>>
+					</button>
+					<hr>
+			   </div>
+			</div>
+        {% endfor %}
+    {% else %}
+        No course found
+    {% endif %}
+
+
+ 
+{% endblock %}
+
+
+
